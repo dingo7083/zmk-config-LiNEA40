@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,
+            //スクロール方向を逆転,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -74,7 +74,7 @@
         CenterClick {
             bindings = <&mkp MB3>;
             key-positions = <17 16>;
-            layers = <0>;
+            layers = <1>;
         };
     };
 
@@ -154,6 +154,17 @@
     keymap {
         compatible = "zmk,keymap";
 
+        default_layer {
+            bindings = <
+&kp Q         &kp W       &kp E               &kp R  &kp T                                        &kp Y          &kp U  &kp I        &kp O      &kp P
+&kp A         &kp S       &kp D               &kp F  &kp G                                        &kp H          &kp J  &kp K        &kp L      &lt 1 ENTER
+&mt LSHIFT Z  &kp X       &kp C               &kp V  &kp B                                        &kp N          &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
+&kp LEFT_WIN  &kp ESCAPE  &mt LEFT_ALT GRAVE  &none  &kp SPACE  &lt 2 TAB    &mt RCTRL RC(SPACE)  &kp BACKSPACE         &lt 4 MINUS  &kp EQUAL  &lt 3 DEL
+            >;
+
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+        };
+
         MOUSE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &mkp MB5  &trans    &trans    &trans  &trans
@@ -192,19 +203,8 @@
 &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                          &bt_ch_0        &bt_ch_1  &bt_ch_2  &bt_ch_3  &bt_ch_4
 &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                         &trans          &trans    &trans    &trans    &trans
 &trans         &trans         &trans         &trans         &trans                                &trans          &trans    &trans    &trans    &bt BT_CLR
-&to 4          &trans         &trans         &trans         &trans         &trans    &bootloader  &studio_unlock            &trans    &trans    &bt BT_CLR_ALL
+&to 0          &trans         &trans         &trans         &trans         &trans    &bootloader  &studio_unlock            &trans    &trans    &bt BT_CLR_ALL
             >;
-        };
-
-        default_layer {
-            bindings = <
-&kp Q         &kp W       &kp E               &kp R  &kp T                                        &kp Y          &kp U  &kp I        &kp O      &kp P
-&kp A         &kp S       &kp D               &kp F  &kp G                                        &kp H          &kp J  &kp K        &kp L      &lt 0 ENTER
-&mt LSHIFT Z  &kp X       &kp C               &kp V  &kp B                                        &kp N          &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
-&kp LEFT_WIN  &kp ESCAPE  &mt LEFT_ALT GRAVE  &none  &kp SPACE  &lt 1 TAB    &mt RCTRL RC(SPACE)  &kp BACKSPACE         &lt 3 MINUS  &kp EQUAL  &lt 2 DEL
-            >;
-
-            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
     };
 };
