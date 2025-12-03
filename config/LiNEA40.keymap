@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -74,12 +74,12 @@
         CenterClick {
             bindings = <&mkp MB3>;
             key-positions = <17 16>;
-            layers = <1>;
+            layers = <2>;
         };
 
         TabClick {
             bindings = <&kp TAB>;
-            key-positions = <10 11>;
+            key-positions = <11 12>;
         };
 
         CapsLock {
@@ -111,7 +111,9 @@
             bindings =
                 <&bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_DISC 4>,
                 <&macro_wait_time 100>,
-                <&bt BT_SEL 0>;
+                <&bt BT_SEL 0>,
+                <&macro_wait_time 100>,
+                <&to 0>;
 
             label = "BT_CH_0";
         };
@@ -122,7 +124,9 @@
             bindings =
                 <&bt BT_DISC 0 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_DISC 4>,
                 <&macro_wait_time 100>,
-                <&bt BT_SEL 1>;
+                <&bt BT_SEL 1>,
+                <&macro_wait_time 100>,
+                <&to 1>;
 
             label = "BT_CH_1";
         };
@@ -133,7 +137,9 @@
             bindings =
                 <&bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 3 &bt BT_DISC 4>,
                 <&macro_wait_time 100>,
-                <&bt BT_SEL 2>;
+                <&bt BT_SEL 2>,
+                <&macro_wait_time 100>,
+                <&to 0>;
 
             label = "BT_CH_2";
         };
@@ -164,12 +170,23 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        default_win {
             bindings = <
-&kp Q         &kp W       &kp E               &kp R  &kp T                                              &kp Y        &kp U  &kp I         &kp O      &kp P
-&kp A         &kp S       &kp D               &kp F  &kp G                                              &kp H        &kp J  &kp K         &kp L      &lt 2 MINUS
-&mt LSHIFT Z  &kp X       &kp C               &kp V  &kp B                                              &kp N        &kp M  &kp COMMA     &kp DOT    &mt RIGHT_SHIFT SLASH
-&kp LEFT_WIN  &kp ESCAPE  &mt LEFT_ALT GRAVE  &none  &lt 3 SPACE  &mt RCTRL LC(SPACE)    &kp BACKSPACE  &lt 4 ENTER         &lt 5 ESCAPE  &kp EQUAL  &kp DEL
+&kp Q         &kp W               &kp E      &kp R  &kp T                                        &kp Y        &kp U  &kp I        &kp O      &kp P
+&kp A         &kp S               &kp D      &kp F  &kp G                                        &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
+&mt LSHIFT Z  &kp X               &kp C      &kp V  &kp B                                        &kp N        &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
+&kp LEFT_WIN  &mt LEFT_ALT GRAVE  &kp LANG2  &none  &lt 4 SPACE  &mt RCTRL DEL    &kp BACKSPACE  &lt 5 ENTER         &lt 6 LANG1  &kp EQUAL  &kp ESC
+            >;
+
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+        };
+
+        default_mac {
+            bindings = <
+&kp Q             &kp W               &kp E           &kp R  &kp T                                                  &kp Y        &kp U  &kp I        &kp O      &kp P
+&kp A             &kp S               &kp D           &kp F  &kp G                                                  &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
+&mt LEFT_SHIFT Z  &kp X               &kp C           &kp V  &kp B                                                  &kp N        &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
+&kp LCTRL         &mt LEFT_ALT GRAVE  &kp LANGUAGE_2  &none  &lt 4 SPACE  &mt LEFT_COMMAND DELETE    &kp BACKSPACE  &lt 5 ENTER         &lt 6 LANG1  &kp EQUAL  &kp ESC
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -199,10 +216,10 @@
 
         NUM {
             bindings = <
-&kp N1          &kp N2    &kp N3     &kp N4     &kp N5                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0
-&trans          &kp HOME  &kp PG_UP  &kp PG_DN  &kp END                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans
-&kp LEFT_SHIFT  &trans    &trans     &trans     &trans                     &trans    &trans    &trans  &trans     &kp RIGHT_SHIFT
-&trans          &trans    &trans     &trans     &trans   &trans    &trans  &trans              &trans  &trans     &trans
+&kp N1          &kp N2                &kp N3                 &kp N4            &kp N5                               &kp N6    &kp N7    &kp N8  &kp N9     &kp N0
+&trans          &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans
+&kp LEFT_SHIFT  &trans                &trans                 &trans            &trans                               &kp HOME  &kp END   &trans  &trans     &mt RIGHT_SHIFT SLASH
+&trans          &trans                &trans                 &trans            &trans             &trans    &trans  &trans              &trans  &trans     &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -221,10 +238,10 @@
 
         WIRELESS {
             bindings = <
-&bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                             &bt_ch_0        &bt_ch_1  &bt_ch_2  &bt_ch_3  &bt_ch_4
-&bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                            &trans          &trans    &trans    &trans    &trans
-&trans         &trans         &trans         &trans         &trans                                   &trans          &trans    &trans    &trans    &bt BT_CLR
-&to 0          &trans         &trans         &trans         &kp LANG2      &kp LANG1    &bootloader  &studio_unlock            &trans    &trans    &bt BT_CLR_ALL
+&none  &none  &none  &none  &none                        &bt_ch_0        &bt_ch_1  &bt_ch_2  &bt_ch_3  &bt_ch_4
+&none  &none  &none  &none  &none                        &none           &none     &none     &none     &none
+&none  &none  &none  &none  &none                        &to 0           &to 1     &none     &none     &bt BT_CLR
+&none  &none  &none  &none  &none  &none    &bootloader  &studio_unlock            &none     &none     &bt BT_CLR_ALL
             >;
         };
     };
