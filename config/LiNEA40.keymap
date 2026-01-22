@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -126,18 +126,6 @@
             toggle-mode = "off";
         };
 
-        mrp: mod_req_pri {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MOD_REQ_PRI";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;    // 判定時間を少し長め（or短め）に調整
-            quick-tap-ms = <125>;       // 素早い連打での誤爆防止
-            flavor = "balanced";   // ★ここが重要：タップを優先する設定
-            bindings = <&kp>, <&kp>;
-
-            require-prior-idle-ms = <300>;
-        };
-
         mtp: mod_tap_pref {
             compatible = "zmk,behavior-hold-tap";
             label = "MOD_TAP_PREF";
@@ -177,7 +165,7 @@
             bindings =
                 <&bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 3 &bt BT_DISC 4 &tog_off 0 &tog_off 1>,
                 <&macro_wait_time 200>,
-                <&bt BT_SEL 2 &tog_on 0>;
+                <&bt BT_SEL 2 &tog_on 1>;
 
             label = "BT_CH_2";
         };
@@ -211,8 +199,8 @@
         default_win {
             bindings = <
 &kp Q              &kp W               &kp E      &kp R  &kp T                                        &kp Y        &kp U  &kp I        &kp O      &kp P
-&mtp LEFT_SHIFT A  &kp S               &kp D      &kp F  &kp G                                        &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
-&mrp LEFT_SHIFT Z  &kp X               &kp C      &kp V  &kp B                                        &kp N        &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
+&kp A              &kp S               &kp D      &kp F  &kp G                                        &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
+&mtp LEFT_SHIFT Z  &kp X               &kp C      &kp V  &kp B                                        &kp N        &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
 &kp LEFT_WIN       &mt LEFT_ALT GRAVE  &kp LANG2  &none  &lt 4 SPACE  &mt RCTRL DEL    &kp BACKSPACE  &lt 5 ENTER         &lt 6 LANG1  &kp EQUAL  &kp ESC
             >;
 
@@ -222,7 +210,7 @@
         default_mac {
             bindings = <
 &kp Q              &kp W               &kp E           &kp R  &kp T                                                  &kp Y        &kp U  &kp I        &kp O      &kp P
-&mrp LEFT_SHIFT A  &kp S               &kp D           &kp F  &kp G                                                  &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
+&kp A              &kp S               &kp D           &kp F  &kp G                                                  &kp H        &kp J  &kp K        &kp L      &lt 3 MINUS
 &mtp LEFT_SHIFT Z  &kp X               &kp C           &kp V  &kp B                                                  &kp N        &kp M  &kp COMMA    &kp DOT    &mt RIGHT_SHIFT SLASH
 &kp LCTRL          &mt LEFT_ALT GRAVE  &kp LANGUAGE_2  &none  &lt 4 SPACE  &mt LEFT_COMMAND DELETE    &kp BACKSPACE  &lt 5 ENTER         &lt 6 LANG1  &kp EQUAL  &kp ESC
             >;
