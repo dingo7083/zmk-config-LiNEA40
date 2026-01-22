@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -135,7 +135,7 @@
             flavor = "tap-preferred";   // ★ここが重要：タップを優先する設定
             bindings = <&kp>, <&kp>;
 
-            require-prior-idle-ms = <200>;
+            require-prior-idle-ms = <1000>;
         };
 
         slt: spacebar_layer_tap {
