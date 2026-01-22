@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -135,14 +135,14 @@
             flavor = "balanced";   // ★ここが重要：タップを優先する設定
             bindings = <&kp>, <&kp>;
 
-            require-prior-idle-ms = <200>;
+            require-prior-idle-ms = <300>;
         };
 
         mtp: mod_tap_pref {
             compatible = "zmk,behavior-hold-tap";
             label = "MOD_TAP_PREF";
             #binding-cells = <2>;
-            tapping-term-ms = <125>;
+            tapping-term-ms = <300>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
