@@ -70,7 +70,6 @@
 
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
-        scan-interval-ms = <3>;
         diode-direction = "col2row";
 
         row-gpios
