@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -132,10 +132,10 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;    // 判定時間を少し長め（or短め）に調整
             quick-tap-ms = <125>;       // 素早い連打での誤爆防止
-            flavor = "tap-preferred";   // ★ここが重要：タップを優先する設定
+            flavor = "balanced";   // ★ここが重要：タップを優先する設定
             bindings = <&kp>, <&kp>;
 
-            require-prior-idle-ms = <1000>;
+            require-prior-idle-ms = <200>;
         };
 
         slt: spacebar_layer_tap {
