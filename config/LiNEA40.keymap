@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -165,7 +165,7 @@
             bindings =
                 <&bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 3 &bt BT_DISC 4 &tog_off 0 &tog_off 1>,
                 <&macro_wait_time 200>,
-                <&bt BT_SEL 2 &tog_on 1>;
+                <&bt BT_SEL 2 &tog_on 0>;
 
             label = "BT_CH_2";
         };
