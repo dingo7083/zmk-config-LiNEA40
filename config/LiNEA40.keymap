@@ -41,7 +41,7 @@
             x-input-code = <INPUT_REL_HWHEEL>;
             y-input-code = <INPUT_REL_WHEEL>;
             trigger-period-ms = <24>;
-            time-to-max-speed-ms = <300>;
+            time-to-max-speed-ms = <100>;
             acceleration-exponent = <1>;
         };
     };
@@ -218,8 +218,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow SCRL_UP    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow SCRL_DOWN  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow MOVE_Y(50)    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow MOVE_Y(-50)  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -229,8 +229,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow SCRL_UP    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow SCRL_DOWN  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow MOVE_Y(50)    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow MOVE_Y(-50)  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
