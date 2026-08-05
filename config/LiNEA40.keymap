@@ -2,7 +2,7 @@
 // &mscの整数丸めにより実際には何も送信されない(エンコーダ・チョン押し共通の下限)
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 130
 // ボタンのチョン押しパルス専用(エンコーダのSCRL_VALより少し強め)
-#define BUTTON_TAP_SCRL_VAL 170
+#define BUTTON_TAP_SCRL_VAL 140
 // エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
 // 短くするほど、エンコーダを連続で回した時にキューに順番待ちが溜まりにくくなる
 #define SCROLL_TAP_MS 10
@@ -50,7 +50,7 @@
             x-input-code = <INPUT_REL_HWHEEL>;
             y-input-code = <INPUT_REL_WHEEL>;
             trigger-period-ms = <2>;
-            time-to-max-speed-ms = <250>;
+            time-to-max-speed-ms = <150>;
             acceleration-exponent = <1>;
         };
 
