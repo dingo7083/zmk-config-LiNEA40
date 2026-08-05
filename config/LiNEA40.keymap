@@ -48,8 +48,8 @@
             x-input-code = <INPUT_REL_HWHEEL>;
             y-input-code = <INPUT_REL_WHEEL>;
             trigger-period-ms = <2>;
-            time-to-max-speed-ms = <200>;
-            acceleration-exponent = <1>;
+            time-to-max-speed-ms = <350>;
+            acceleration-exponent = <2>;
         };
 
         scroll_up_ht: scroll_up_hold_tap {
@@ -263,8 +263,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(30) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-30) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(45) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-45) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -274,8 +274,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(30) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-30) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(45) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-45) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
