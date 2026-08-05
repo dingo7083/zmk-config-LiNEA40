@@ -1,4 +1,6 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+// エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
+#define SCROLL_TAP_MS 15
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -26,8 +28,8 @@
 //mouse scroll
 
 &msc {
-    delay-ms = <3>;
-    trigger-period-ms = <3>;
+    delay-ms = <0>;
+    trigger-period-ms = <2>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <0>;
 };
@@ -71,18 +73,18 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
-                <&macro_press &msc MOVE_Y(150)>,
-                <&macro_wait_time 25>,
-                <&macro_release &msc MOVE_Y(150)>;
+                <&macro_press &msc MOVE_Y(ZMK_POINTING_DEFAULT_SCRL_VAL)>,
+                <&macro_wait_time SCROLL_TAP_MS>,
+                <&macro_release &msc MOVE_Y(ZMK_POINTING_DEFAULT_SCRL_VAL)>;
         };
 
         scroll_tap_down: scroll_tap_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
-                <&macro_press &msc MOVE_Y(-150)>,
-                <&macro_wait_time 25>,
-                <&macro_release &msc MOVE_Y(-150)>;
+                <&macro_press &msc MOVE_Y(-ZMK_POINTING_DEFAULT_SCRL_VAL)>,
+                <&macro_wait_time SCROLL_TAP_MS>,
+                <&macro_release &msc MOVE_Y(-ZMK_POINTING_DEFAULT_SCRL_VAL)>;
         };
     };
 
@@ -164,7 +166,7 @@
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
 
-            tap-ms = <20>;
+            tap-ms = <SCROLL_TAP_MS>;
         };
     };
 
