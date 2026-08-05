@@ -258,8 +258,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(15) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-15) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(22) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-22) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -269,8 +269,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(15) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-15) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(22) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-22) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
