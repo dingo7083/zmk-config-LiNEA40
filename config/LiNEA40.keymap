@@ -1,4 +1,12 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
+// 移動量(units) × SCROLL_TAP_MS(ms) ÷ 1000 が1以上でないと、
+// &mscの整数丸めにより実際には何も送信されない(エンコーダ・チョン押し共通の下限)
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 130
+// ボタンのチョン押しパルス専用。Androidのページ送りが2ページ分になって
+// しまうため、これ以上は上げられない(エンコーダのSCRL_VALと同値が上限)
+#define BUTTON_TAP_SCRL_VAL 130
+// エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
+// 短くするほど、エンコーダを連続で回した時にキューに順番待ちが溜まりにくくなる
+#define SCROLL_TAP_MS 10
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -26,10 +34,73 @@
 //mouse scroll
 
 &msc {
-    delay-ms = <3>;
-    trigger-period-ms = <3>;
+    delay-ms = <0>;
+    trigger-period-ms = <2>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <0>;
+};
+
+// ボタンによるスクロール専用。エンコーダ(mouse_scrl)は&mscを直接使うので
+// msc_slowの調整では影響を受けない。
+// チョン押し=固定の小さいパルス(scroll_tap_up/down)、長押し=継続スクロール
+// (msc_slow)をhold-tapで完全に分離し、反応性と長押し速度を独立に調整できる。
+/ {
+    behaviors {
+        msc_slow: mouse_scroll_slow {
+            compatible = "zmk,behavior-input-two-axis";
+            #binding-cells = <1>;
+            x-input-code = <INPUT_REL_HWHEEL>;
+            y-input-code = <INPUT_REL_WHEEL>;
+            trigger-period-ms = <2>;
+            time-to-max-speed-ms = <150>;
+            acceleration-exponent = <1>;
+        };
+
+        scroll_up_ht: scroll_up_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <220>;
+            hold-while-undecided;
+            bindings = <&msc_slow>, <&scroll_tap_up>;
+        };
+
+        scroll_down_ht: scroll_down_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <220>;
+            hold-while-undecided;
+            bindings = <&msc_slow>, <&scroll_tap_down>;
+        };
+    };
+
+    macros {
+        scroll_tap_up: scroll_tap_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press &msc MOVE_Y(BUTTON_TAP_SCRL_VAL)>,
+                <&macro_wait_time SCROLL_TAP_MS>,
+                <&macro_release &msc MOVE_Y(BUTTON_TAP_SCRL_VAL)>;
+        };
+
+        scroll_tap_down: scroll_tap_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press &msc MOVE_Y(-BUTTON_TAP_SCRL_VAL)>,
+                <&macro_wait_time SCROLL_TAP_MS>,
+                <&macro_release &msc MOVE_Y(-BUTTON_TAP_SCRL_VAL)>;
+        };
+    };
+
+    // input eventはzmk,input-listener経由でHIDレポートに変換されるため、
+    // listenerが無いとmsc_slowのイベントは破棄されスクロールしない
+    msc_slow_input_listener: msc_slow_input_listener {
+        compatible = "zmk,input-listener";
+        device = <&msc_slow>;
+    };
 };
 
 / {
@@ -99,7 +170,7 @@
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
 
-            tap-ms = <20>;
+            tap-ms = <SCROLL_TAP_MS>;
         };
 
         //        lt_to_layer_0: lt_to_layer_0 {
@@ -219,8 +290,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc SCRL_UP    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc SCRL_DOWN  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(36) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-36) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -230,8 +301,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc SCRL_UP    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc SCRL_DOWN  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(36) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-36) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
