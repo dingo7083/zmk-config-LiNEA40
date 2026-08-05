@@ -1,8 +1,9 @@
 // 移動量(units) × SCROLL_TAP_MS(ms) ÷ 1000 が1以上でないと、
 // &mscの整数丸めにより実際には何も送信されない(エンコーダ・チョン押し共通の下限)
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 130
-// ボタンのチョン押しパルス専用(エンコーダのSCRL_VALより少し強め)
-#define BUTTON_TAP_SCRL_VAL 140
+// ボタンのチョン押しパルス専用。Androidのページ送りが2ページ分になって
+// しまうため、これ以上は上げられない(エンコーダのSCRL_VALと同値が上限)
+#define BUTTON_TAP_SCRL_VAL 130
 // エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
 // 短くするほど、エンコーダを連続で回した時にキューに順番待ちが溜まりにくくなる
 #define SCROLL_TAP_MS 10
