@@ -1,6 +1,6 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 50
 // エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
-#define SCROLL_TAP_MS 15
+#define SCROLL_TAP_MS 10
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
