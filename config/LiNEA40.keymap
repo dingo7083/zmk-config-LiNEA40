@@ -72,7 +72,7 @@
             #binding-cells = <0>;
             bindings =
                 <&macro_press &msc MOVE_Y(150)>,
-                <&macro_wait_time 20>,
+                <&macro_wait_time 25>,
                 <&macro_release &msc MOVE_Y(150)>;
         };
 
@@ -81,7 +81,7 @@
             #binding-cells = <0>;
             bindings =
                 <&macro_press &msc MOVE_Y(-150)>,
-                <&macro_wait_time 20>,
+                <&macro_wait_time 25>,
                 <&macro_release &msc MOVE_Y(-150)>;
         };
     };
