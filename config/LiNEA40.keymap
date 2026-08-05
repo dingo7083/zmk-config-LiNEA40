@@ -52,6 +52,7 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <150>;
+            hold-while-undecided;
             bindings = <&msc_slow>, <&scroll_tap_up>;
         };
 
@@ -60,6 +61,7 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <150>;
+            hold-while-undecided;
             bindings = <&msc_slow>, <&scroll_tap_down>;
         };
     };
