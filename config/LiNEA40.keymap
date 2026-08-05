@@ -1,6 +1,8 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 50
+// 移動量(units) × SCROLL_TAP_MS(ms) ÷ 1000 が1以上でないと、
+// &mscの整数丸めにより実際には何も送信されない(エンコーダ・チョン押し共通の下限)
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 // エンコーダ1クリック/ボタンのチョン押しパルス、共通の疑似押下時間(ms)
-#define SCROLL_TAP_MS 10
+#define SCROLL_TAP_MS 15
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -44,9 +46,9 @@
             #binding-cells = <1>;
             x-input-code = <INPUT_REL_HWHEEL>;
             y-input-code = <INPUT_REL_WHEEL>;
-            trigger-period-ms = <4>;
-            time-to-max-speed-ms = <150>;
-            acceleration-exponent = <0>;
+            trigger-period-ms = <2>;
+            time-to-max-speed-ms = <200>;
+            acceleration-exponent = <1>;
         };
 
         scroll_up_ht: scroll_up_hold_tap {
@@ -260,8 +262,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(19) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-19) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(30) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-30) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -271,8 +273,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(19) 0    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-19) 0  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(30) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-30) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
