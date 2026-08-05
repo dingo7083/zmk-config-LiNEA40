@@ -33,6 +33,8 @@
 };
 
 // キー押下によるスクロール専用(ロータリーエンコーダのmouse_scrlは&mscを直接使うので影響しない)
+// チョン押し=固定の小さいパルス(scroll_tap_up/down)、長押し=継続スクロール(msc_slow)を
+// hold-tapで完全に分離。msc_slowの速度は長押し専用なので反応性を気にせず調整できる。
 / {
     behaviors {
         msc_slow: mouse_scroll_slow {
@@ -43,6 +45,42 @@
             trigger-period-ms = <4>;
             time-to-max-speed-ms = <150>;
             acceleration-exponent = <0>;
+        };
+
+        scroll_up_ht: scroll_up_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            bindings = <&msc_slow>, <&scroll_tap_up>;
+        };
+
+        scroll_down_ht: scroll_down_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            bindings = <&msc_slow>, <&scroll_tap_down>;
+        };
+    };
+
+    macros {
+        scroll_tap_up: scroll_tap_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press &msc MOVE_Y(150)>,
+                <&macro_wait_time 20>,
+                <&macro_release &msc MOVE_Y(150)>;
+        };
+
+        scroll_tap_down: scroll_tap_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press &msc MOVE_Y(-150)>,
+                <&macro_wait_time 20>,
+                <&macro_release &msc MOVE_Y(-150)>;
         };
     };
 
@@ -218,8 +256,8 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow MOVE_Y(40)    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow MOVE_Y(-40)  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(15) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-15) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
@@ -229,8 +267,8 @@
 
         MOUSE_SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &msc_slow MOVE_Y(40)    &trans
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &msc_slow MOVE_Y(-40)  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &mkp MB3  &trans    &scroll_up_ht MOVE_Y(15) 0    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &scroll_down_ht MOVE_Y(-15) 0  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans          &trans
             >;
