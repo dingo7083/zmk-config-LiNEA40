@@ -42,7 +42,7 @@
             y-input-code = <INPUT_REL_WHEEL>;
             trigger-period-ms = <24>;
             time-to-max-speed-ms = <150>;
-            acceleration-exponent = <1>;
+            acceleration-exponent = <0>;
         };
     };
 
