@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# エディタ
+*.swp
+*~
+.vscode/
+
+# West/Zephyrワークスペース
+# `west init -l config/` をリポジトリ直下で実行するとここに展開される
+# (GitHub Actionsのビルドと同じ構成)
+/.west/
+/zephyr/
+/modules/
+/bootloader/
+/tools/
+/zmk/
+/zmk-pmw3610-driver/
+/zmk-rgbled-widget/
+
+# ビルド成果物
+/build/
+*.uf2
+*.hex
+*.bin
