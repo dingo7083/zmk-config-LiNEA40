@@ -10,7 +10,6 @@
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
-#include <behaviors/input_gestures_accel.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -123,28 +122,9 @@
     };
 };
 
-// カーソル加速。14mmボールは指のストロークが足りず「大きく滑る」動きが
-// 出せないため、低速=精度・高速=大ゲインの非線形変換で補う。
-// 単位はcounts/secで、CPI700なら 700cps = ボール表面1インチ/秒。
-&pointer_accel {
-    input-type = <INPUT_EV_REL>;    // 必須プロパティ
-    track-remainders;               // 低速時に端数を捨てない
-    // 1.0倍未満にすると低速時にカクつく。raw=1に0.8を掛けると
-    // 出力が 0,1,1,0,1... と不規則になるため(端数持ち越しの副作用)。
-    // 精度が足りなければCPI側かsnipe層で落とす。
-    min-factor = <1000>;            // 減速なし
-    max-factor = <2500>;            // 高速時 2.5倍(4.0は飛びすぎた)
-    speed-threshold = <1300>;       // ここで等倍。約1.9インチ/秒
-    speed-max = <5000>;             // ここで最大。約7インチ/秒の一振り
-    acceleration-exponent = <2>;    // 2乗カーブ。閾値付近は穏やか、振ると伸びる
-};
-
+// カーソル加速はドライバ側(CONFIG_PMW3610_ACCELERATION_*)で行うため、
+// ここには input-processor を置かない。
 &trackball_listener {
-    // ベースに置くことでカーソル移動だけに効く。レイヤーオーバーライドが
-    // マッチするとベースは実行されない(process-next未指定時)ため、
-    // 下のscroller(FUNCTION層)には加速がかからない。
-    input-processors = <&pointer_accel>;
-
     scroller {
         layers = <FUNCTION>;
         input-processors =
