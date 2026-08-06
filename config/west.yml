@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/kay-yokoyama
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    - name: oleksandrmaslov
+      url-base: https://github.com/oleksandrmaslov
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -19,5 +21,10 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: v0.3-branch
+    # カーソル加速。ビルドの再現性のためSHA固定(main追従だと他人のpushで
+    # 挙動が変わり、チューニング中の切り分けが濁る)
+    - name: zmk-pointing-acceleration
+      remote: oleksandrmaslov
+      revision: 0da8f97f8f2abb18fcc9d488b25357511922cf32
   self:
     path: config
